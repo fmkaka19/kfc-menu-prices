@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" fill="none">
+  <rect width="600" height="400" rx="12" fill="#FFF9F2"/>
+  
+  <!-- Plate -->
+  <ellipse cx="300" cy="270" rx="180" ry="80" fill="#E8E1D8"/>
+  <ellipse cx="300" cy="260" rx="160" ry="70" fill="#FFFFFF"/>
+
+  <!-- Biscuit 1 -->
+  <g transform="translate(180, 160)">
+    <path d="M 20,40 C 20,10 60,0 100,0 C 140,0 180,10 180,40 L 180,80 C 180,100 140,110 100,110 C 60,110 20,100 20,80 Z" fill="#F39C12" stroke="#D35400" stroke-width="3"/>
+    <ellipse cx="100" cy="20" rx="70" ry="20" fill="#F8C471"/>
+    <line x1="40" y1="45" x2="160" y2="45" stroke="#B9770E" stroke-width="4"/>
+  </g>
+  
+  <rect x="30" y="30" width="90" height="32" rx="6" fill="#8B1E1E"/>
+  <text x="75" y="51" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">BISCUIT</text>
+</svg>

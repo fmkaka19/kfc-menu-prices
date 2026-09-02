@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" fill="none">
+  <rect width="600" height="400" rx="12" fill="#FFF9F2"/>
+  
+  <!-- Outer Bowl -->
+  <ellipse cx="300" cy="270" rx="160" ry="80" fill="#241F1F"/>
+  <ellipse cx="300" cy="255" rx="150" ry="70" fill="#E8E1D8"/>
+  <ellipse cx="300" cy="245" rx="140" ry="60" fill="#FFF9F2"/>
+  
+  <!-- Mashed Potatoes Mound -->
+  <ellipse cx="300" cy="230" rx="130" ry="50" fill="#FEF9E7"/>
+  <!-- Gravy Lake -->
+  <ellipse cx="300" cy="225" rx="80" ry="30" fill="#D35400"/>
+  <ellipse cx="295" cy="223" rx="60" ry="22" fill="#A04000"/>
+  
+  <rect x="30" y="30" width="90" height="32" rx="6" fill="#8B1E1E"/>
+  <text x="75" y="51" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">SIDES</text>
+</svg>
