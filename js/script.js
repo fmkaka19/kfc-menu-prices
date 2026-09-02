@@ -341,6 +341,15 @@ document.addEventListener('DOMContentLoaded', () => {
       currentSearchQuery = e.target.value.trim();
       renderMenuItems();
     });
+
+    // Clear search on Escape key
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        searchInput.value = '';
+        currentSearchQuery = '';
+        renderMenuItems();
+      }
+    });
   }
 
   filterPills.forEach(pill => {
@@ -352,10 +361,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Quick Category Row Click -> Sync Filter Pill & Smooth Scroll
+  const quickCatCards = document.querySelectorAll('.quick-category-card');
+  quickCatCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      const catName = card.querySelector('.quick-category-name')?.textContent.trim();
+      if (!catName) return;
+
+      // Find matching category pill
+      const targetCategory = (catName === 'Fried Chicken') ? 'Chicken' : catName;
+      const matchingPill = Array.from(filterPills).find(
+        p => p.getAttribute('data-category').toLowerCase() === targetCategory.toLowerCase()
+      );
+
+      if (matchingPill) {
+        filterPills.forEach(p => p.classList.remove('active'));
+        matchingPill.classList.add('active');
+        currentCategory = matchingPill.getAttribute('data-category');
+        renderMenuItems();
+      }
+    });
+  });
+
   // --------------------------------------------------------------------------
   // 5. Mobile Navigation Drawer State Manager
   // --------------------------------------------------------------------------
   function openMobileNav() {
+    if (!hamburgerBtn || !mobileOverlay || !mobilePanel) return;
     hamburgerBtn.classList.add('is-active');
     hamburgerBtn.setAttribute('aria-expanded', 'true');
     mobileOverlay.classList.add('is-active');
@@ -364,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeMobileNav() {
+    if (!hamburgerBtn || !mobileOverlay || !mobilePanel) return;
     hamburgerBtn.classList.remove('is-active');
     hamburgerBtn.setAttribute('aria-expanded', 'false');
     mobileOverlay.classList.remove('is-active');
@@ -396,6 +429,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Close drawer if window is resized above mobile breakpoint (768px)
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && hamburgerBtn && hamburgerBtn.classList.contains('is-active')) {
+      closeMobileNav();
+    }
+  });
+
   // --------------------------------------------------------------------------
   // 6. FAQ Accordion Manager
   // --------------------------------------------------------------------------
@@ -403,6 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
   faqButtons.forEach(button => {
     button.addEventListener('click', () => {
       const faqItem = button.closest('.faq-item');
+      if (!faqItem) return;
       const isOpen = faqItem.classList.contains('active');
 
       // Close all active items
@@ -421,13 +462,38 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --------------------------------------------------------------------------
-  // 7. Sticky Header Shadow on Scroll
+  // 7. Sticky Header & Scrollspy Manager
   // --------------------------------------------------------------------------
+  const navDesktopLinks = document.querySelectorAll('.nav-desktop .nav-link');
+  const sections = document.querySelectorAll('section[id]');
+
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      siteHeader.classList.add('is-scrolled');
-    } else {
-      siteHeader.classList.remove('is-scrolled');
+    if (siteHeader) {
+      if (window.scrollY > 20) {
+        siteHeader.classList.add('is-scrolled');
+      } else {
+        siteHeader.classList.remove('is-scrolled');
+      }
+    }
+
+    // Scrollspy highlight active section link in header nav
+    let currentSectionId = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.offsetHeight;
+      if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+        currentSectionId = section.getAttribute('id');
+      }
+    });
+
+    if (currentSectionId) {
+      navDesktopLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+        if (href === `#${currentSectionId}`) {
+          link.classList.add('active');
+        }
+      });
     }
   });
 
