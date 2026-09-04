@@ -5,265 +5,325 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
-  // 1. Comprehensive KFC Menu Data Repository
+  // 1. Comprehensive KFC Menu Data Repository (Aligned with Competitor Categories & WebP Images)
   // --------------------------------------------------------------------------
   const menuItems = [
-    // --- COMBOS & MEALS ---
+    // --- EVERYDAY VALUE ---
     {
-      id: "c1",
-      name: "3 Pc. Tenders Combo",
-      category: "Combos",
-      price: "$8.99",
-      calories: "780-1120 cal",
-      description: "3 hand-breaded Extra Crispy tenders, 1 side, 1 biscuit, and a medium drink.",
-      image: "assets/images/crispy-tenders.svg",
+      id: "ev1",
+      name: "Krunch Burger",
+      category: "Everyday Value",
+      price: "Rs. 310 ($1.10)",
+      calories: "380 cal",
+      description: "Crunchy signature crispy chicken fillet with spicy mayo in a soft toasted sesame bun.",
+      image: "assets/images/chicken-sandwich.webp",
       featured: true,
       popular: true
     },
     {
-      id: "c2",
-      name: "Classic Chicken Sandwich Combo",
-      category: "Combos",
-      price: "$8.49",
-      calories: "920-1250 cal",
-      description: "Crispy chicken breast filet with pickles & mayo, served with 1 side and a medium drink.",
-      image: "assets/images/chicken-sandwich.svg",
+      id: "ev2",
+      name: "Krunch Combo Meal",
+      category: "Everyday Value",
+      price: "Rs. 620 ($2.25)",
+      calories: "680 cal",
+      description: "1 Krunch Burger, 1 regular secret recipe fries, and 1 refreshing chilled drink.",
+      image: "assets/images/combo-meal.webp",
       featured: true,
       popular: true
     },
     {
-      id: "c3",
-      name: "2 Pc. Drum & Thigh Combo",
-      category: "Combos",
-      price: "$7.99",
-      calories: "850-1180 cal",
-      description: "2 pieces of Original Recipe or Extra Crispy chicken, 1 side, 1 biscuit, and a drink.",
-      image: "assets/images/combo-meal.svg",
-      featured: true,
-      popular: false
-    },
-    {
-      id: "c4",
-      name: "12 Pc. Nuggets Combo",
-      category: "Combos",
-      price: "$9.29",
-      calories: "710-1040 cal",
-      description: "12 100% white meat nuggets, dipping sauce, 1 side, 1 biscuit, and medium drink.",
-      image: "assets/images/chicken-nuggets.svg",
-      featured: true,
-      popular: true
-    },
-
-    // --- CHICKEN ---
-    {
-      id: "ch1",
-      name: "8 Pc. Original Recipe Bucket",
-      category: "Chicken",
-      price: "$19.99",
-      calories: "1760 cal",
-      description: "8 pieces of famous Original Recipe chicken (2 drums, 2 thighs, 2 breasts, 2 wings).",
-      image: "assets/images/hero-chicken.svg",
-      featured: true,
+      id: "ev3",
+      name: "Rice & Spice Bowl",
+      category: "Everyday Value",
+      price: "Rs. 420 ($1.50)",
+      calories: "490 cal",
+      description: "Aromatic spiced rice served with crispy chicken bites and KFC signature savory gravy.",
+      image: "assets/images/combo-meal.webp",
+      featured: false,
       popular: true
     },
     {
-      id: "ch2",
-      name: "4 Pc. Chicken Meal",
-      category: "Chicken",
-      price: "$11.49",
-      calories: "1100 cal",
-      description: "4 pieces of fried chicken (breast, thigh, drum, wing), 2 individual sides, 1 biscuit.",
-      image: "assets/images/hero-chicken.svg",
+      id: "ev4",
+      name: "Zingeratha Wrap",
+      category: "Everyday Value",
+      price: "Rs. 450 ($1.60)",
+      calories: "520 cal",
+      description: "Crispy chicken fillet rolled in a golden flaky paratha with tangy sauce and fresh sliced onions.",
+      image: "assets/images/crispy-tenders.webp",
       featured: false,
       popular: false
     },
     {
-      id: "ch3",
-      name: "Hot Wings (8 Pc.)",
-      category: "Chicken",
-      price: "$8.99",
-      calories: "560 cal",
-      description: "8 spicy coated crispy hot wings packed with fiery bold flavor.",
-      image: "assets/images/crispy-tenders.svg",
+      id: "ev5",
+      name: "Twister Crispy Wrap",
+      category: "Everyday Value",
+      price: "Rs. 520 ($1.85)",
+      calories: "490 cal",
+      description: "Tender chicken strips with diced ripe tomatoes, crisp lettuce, and pepper mayo in a warm tortilla.",
+      image: "assets/images/crispy-tenders.webp",
       featured: false,
       popular: false
     },
 
-    // --- SANDWICHES ---
+    // --- ALA CARTE & COMBOS ---
     {
-      id: "s1",
-      name: "KFC Classic Chicken Sandwich",
-      category: "Sandwiches",
-      price: "$4.99",
-      calories: "650 cal",
-      description: "Extra Crispy chicken breast filet, premium pickles, and mayo on a toasted brioche bun.",
-      image: "assets/images/chicken-sandwich.svg",
+      id: "ac1",
+      name: "Classic Zinger Burger",
+      category: "Ala Carte & Combos",
+      price: "Rs. 650 ($2.35)",
+      calories: "550 cal",
+      description: "KFC's iconic hand-breaded crunchy spicy chicken breast fillet topped with lettuce and mayo.",
+      image: "assets/images/chicken-sandwich.webp",
       featured: true,
       popular: true
     },
     {
-      id: "s2",
-      name: "Spicy Chicken Sandwich",
-      category: "Sandwiches",
-      price: "$4.99",
-      calories: "660 cal",
-      description: "Extra Crispy chicken breast filet, spicy mayo sauce, and pickles on a brioche bun.",
-      image: "assets/images/chicken-sandwich.svg",
+      id: "ac2",
+      name: "Classic Zinger Combo",
+      category: "Ala Carte & Combos",
+      price: "Rs. 950 ($3.40)",
+      calories: "890 cal",
+      description: "1 Classic Zinger burger, 1 regular golden fries, and 1 regular chilled fountain drink.",
+      image: "assets/images/combo-meal.webp",
       featured: true,
       popular: true
     },
     {
-      id: "s3",
-      name: "Chicken Little Sandwich",
-      category: "Sandwiches",
-      price: "$2.99",
-      calories: "300 cal",
-      description: "Crispy tender, mayo, and pickle on a sesame seed bun. Perfect quick snack.",
-      image: "assets/images/chicken-sandwich.svg",
-      featured: false,
-      popular: false
-    },
-
-    // --- TENDERS ---
-    {
-      id: "t1",
-      name: "5 Pc. Extra Crispy Tenders",
-      category: "Tenders",
-      price: "$9.49",
-      calories: "650 cal",
-      description: "5 hand-breaded Extra Crispy tenders served with 2 dipping sauces of your choice.",
-      image: "assets/images/crispy-tenders.svg",
+      id: "ac3",
+      name: "Mighty Zinger Burger",
+      category: "Ala Carte & Combos",
+      price: "Rs. 890 ($3.20)",
+      calories: "850 cal",
+      description: "Double crunchy spicy chicken fillets with cheese slice, fresh lettuce, and signature spicy mayo.",
+      image: "assets/images/chicken-sandwich.webp",
       featured: true,
       popular: true
     },
     {
-      id: "t2",
-      name: "3 Pc. Tenders Individual",
-      category: "Tenders",
-      price: "$5.99",
-      calories: "390 cal",
-      description: "3 juicy, hand-breaded chicken tenders with 1 dipping sauce.",
-      image: "assets/images/crispy-tenders.svg",
+      id: "ac4",
+      name: "Kentucky Crispy Burger Combo",
+      category: "Ala Carte & Combos",
+      price: "Rs. 820 ($2.95)",
+      calories: "860 cal",
+      description: "Crispy chicken fillet with cheese, smoky BBQ sauce, fries, and a chilled drink.",
+      image: "assets/images/combo-meal.webp",
       featured: false,
       popular: false
     },
-
-    // --- NUGGETS ---
     {
-      id: "n1",
-      name: "8 Pc. KFC Nuggets",
-      category: "Nuggets",
-      price: "$4.49",
-      calories: "280 cal",
-      description: "8 pieces of 100% white meat chicken nuggets hand-breaded in Original Recipe spices.",
-      image: "assets/images/chicken-nuggets.svg",
-      featured: false,
+      id: "ac5",
+      name: "3 Pc. Extra Crispy Tenders Combo",
+      category: "Ala Carte & Combos",
+      price: "Rs. 890 ($3.20)",
+      calories: "780 cal",
+      description: "3 hand-breaded chicken tenders, dipping sauce, 1 regular fries, dinner roll, and a drink.",
+      image: "assets/images/crispy-tenders.webp",
+      featured: true,
+      popular: true
+    },
+
+    // --- SIGNATURE BOXES ---
+    {
+      id: "sb1",
+      name: "KFC Crispy Box Meal",
+      category: "Signature Boxes",
+      price: "Rs. 1,050 ($3.75)",
+      calories: "980 cal",
+      description: "1 piece of Hot & Crispy fried chicken, 1 regular fries, 1 regular drink, and 1 dinner roll with gravy.",
+      image: "assets/images/combo-meal.webp",
+      featured: true,
       popular: true
     },
     {
-      id: "n2",
-      name: "12 Pc. KFC Nuggets",
-      category: "Nuggets",
-      price: "$6.49",
-      calories: "420 cal",
-      description: "12 bite-sized white meat chicken nuggets cooked golden crispy.",
-      image: "assets/images/chicken-nuggets.svg",
-      featured: false,
-      popular: false
+      id: "sb2",
+      name: "KFC Boneless Box",
+      category: "Signature Boxes",
+      price: "Rs. 1,150 ($4.15)",
+      calories: "920 cal",
+      description: "4 crispy tenders, 1 regular fries, 1 soft dinner roll, dipping sauce, and 1 chilled drink.",
+      image: "assets/images/crispy-tenders.webp",
+      featured: true,
+      popular: true
+    },
+    {
+      id: "sb3",
+      name: "KFC WOW Box Feast",
+      category: "Signature Boxes",
+      price: "Rs. 1,250 ($4.50)",
+      calories: "1150 cal",
+      description: "1 signature Zinger burger, 1 piece Hot & Crispy chicken, 1 regular fries, and 1 chilled beverage.",
+      image: "assets/images/combo-meal.webp",
+      featured: true,
+      popular: true
+    },
+    {
+      id: "sb4",
+      name: "KFC Xtreme Duo Box",
+      category: "Signature Boxes",
+      price: "Rs. 1,650 ($5.95)",
+      calories: "1580 cal",
+      description: "2 Zinger burgers, 2 pieces of Hot & Crispy fried chicken, 1 large fries, and 2 chilled drinks.",
+      image: "assets/images/family-bucket.webp",
+      featured: true,
+      popular: true
     },
 
-    // --- FAMILY MEALS ---
+    // --- SHARING & BUCKETS ---
     {
-      id: "f1",
+      id: "sh1",
+      name: "9 Pc. Value Chicken Bucket",
+      category: "Sharing & Buckets",
+      price: "Rs. 2,450 ($8.80)",
+      calories: "2100 cal",
+      description: "9 mouth-watering pieces of signature Hot & Crispy or Original Recipe fried chicken.",
+      image: "assets/images/hero-chicken.webp",
+      featured: true,
+      popular: true
+    },
+    {
+      id: "sh2",
       name: "12 Pc. Family Bucket Meal",
-      category: "Family Meals",
-      price: "$32.99",
+      category: "Sharing & Buckets",
+      price: "Rs. 3,890 ($13.90)",
       calories: "3400 cal",
-      description: "12 pieces of Original Recipe or Extra Crispy chicken, 3 large sides, and 6 biscuits.",
-      image: "assets/images/family-bucket.svg",
+      description: "12 pieces of fried chicken, 3 large sides (fries or coleslaw), and 6 warm dinner rolls or biscuits.",
+      image: "assets/images/family-bucket.webp",
       featured: true,
       popular: true
     },
     {
-      id: "f2",
-      name: "16 Pc. Family Feast",
-      category: "Family Meals",
-      price: "$39.99",
+      id: "sh3",
+      name: "Family Festival Feast 1",
+      category: "Sharing & Buckets",
+      price: "Rs. 2,850 ($10.20)",
+      calories: "2900 cal",
+      description: "4 Krunch burgers, 4 pieces Hot & Crispy chicken, 2 regular fries, and 1 giant 1.5L drink.",
+      image: "assets/images/family-bucket.webp",
+      featured: true,
+      popular: true
+    },
+    {
+      id: "sh4",
+      name: "Family Festival Feast 2",
+      category: "Sharing & Buckets",
+      price: "Rs. 3,450 ($12.40)",
+      calories: "3300 cal",
+      description: "2 Zinger burgers, 2 Krunch burgers, 4 pieces fried chicken, 2 regular fries, and 1.5L drink.",
+      image: "assets/images/family-bucket.webp",
+      featured: true,
+      popular: false
+    },
+    {
+      id: "sh5",
+      name: "16 Pc. Super Family Feast",
+      category: "Sharing & Buckets",
+      price: "Rs. 4,750 ($16.99)",
       calories: "4500 cal",
-      description: "16 pieces of chicken, 4 large sides, and 8 warm buttermilk biscuits.",
-      image: "assets/images/family-bucket.svg",
+      description: "16 pieces of crispy fried chicken, 4 large sides, and 8 warm dinner rolls or biscuits.",
+      image: "assets/images/family-bucket.webp",
+      featured: false,
+      popular: false
+    },
+
+    // --- SNACKS & BEVERAGES ---
+    {
+      id: "sbv1",
+      name: "Secret Recipe French Fries",
+      category: "Snacks & Beverages",
+      price: "Rs. 320 ($1.15)",
+      calories: "380 cal",
+      description: "Golden crispy french fries seasoned with KFC's secret blend of herbs and spices.",
+      image: "assets/images/french-fries.webp",
+      featured: false,
+      popular: true
+    },
+    {
+      id: "sbv2",
+      name: "Hot Wings (8 Pc.)",
+      category: "Snacks & Beverages",
+      price: "Rs. 650 ($2.35)",
+      calories: "560 cal",
+      description: "8 pieces of juicy chicken wings tossed in KFC's fiery hot and crunchy signature breading.",
+      image: "assets/images/crispy-tenders.webp",
+      featured: false,
+      popular: true
+    },
+    {
+      id: "sbv3",
+      name: "12 Pc. Crispy Nuggets",
+      category: "Snacks & Beverages",
+      price: "Rs. 680 ($2.45)",
+      calories: "420 cal",
+      description: "12 pieces of 100% tender white meat chicken nuggets served with signature dipping sauce.",
+      image: "assets/images/chicken-nuggets.webp",
+      featured: false,
+      popular: false
+    },
+    {
+      id: "sbv4",
+      name: "Mashed Potatoes & Gravy",
+      category: "Snacks & Beverages",
+      price: "Rs. 250 ($0.90)",
+      calories: "130 cal",
+      description: "Creamy whipped mashed potatoes topped with savory signature brown herb gravy.",
+      image: "assets/images/mashed-potatoes.webp",
+      featured: false,
+      popular: true
+    },
+    {
+      id: "sbv5",
+      name: "Fresh Coleslaw Salad",
+      category: "Snacks & Beverages",
+      price: "Rs. 220 ($0.80)",
+      calories: "150 cal",
+      description: "Crisp shredded cabbage and sweet carrots tossed in creamy seasoned dressing.",
+      image: "assets/images/mashed-potatoes.webp",
+      featured: false,
+      popular: false
+    },
+    {
+      id: "sbv6",
+      name: "Chilled Fountain Drinks (Medium)",
+      category: "Snacks & Beverages",
+      price: "Rs. 190 ($0.70)",
+      calories: "210 cal",
+      description: "Ice-cold refreshing fountain beverage: Pepsi, 7up, Mirinda, or Mountain Dew.",
+      image: "assets/images/soft-drink.webp",
+      featured: false,
+      popular: false
+    },
+
+    // --- MIDNIGHT DEALS ---
+    {
+      id: "md1",
+      name: "Midnight Deal 1",
+      category: "Midnight Deals",
+      price: "Rs. 590 ($2.10)",
+      calories: "760 cal",
+      description: "1 Classic Zinger Burger + 1 Regular Chilled Fountain Drink. Available 12 AM to 3 AM.",
+      image: "assets/images/combo-meal.webp",
       featured: true,
       popular: true
     },
-
-    // --- SIDES ---
     {
-      id: "sd1",
-      name: "Secret Recipe Fries (Large)",
-      category: "Sides",
-      price: "$3.79",
-      calories: "480 cal",
-      description: "Crispy coated french fries seasoned with secret blend of herbs & spices.",
-      image: "assets/images/french-fries.svg",
-      featured: false,
+      id: "md2",
+      name: "Midnight Deal 2",
+      category: "Midnight Deals",
+      price: "Rs. 790 ($2.85)",
+      calories: "980 cal",
+      description: "2 Krunch Burgers + 1 Regular Secret Recipe Fries + 2 Chilled Drinks. Late night exclusive.",
+      image: "assets/images/combo-meal.webp",
+      featured: true,
       popular: true
     },
     {
-      id: "sd2",
-      name: "Mashed Potatoes & Gravy",
-      category: "Sides",
-      price: "$2.99",
-      calories: "130 cal",
-      description: "Creamy whipped mashed potatoes topped with signature savory brown gravy.",
-      image: "assets/images/mashed-potatoes.svg",
-      featured: false,
-      popular: true
-    },
-    {
-      id: "sd3",
-      name: "Warm Buttermilk Biscuit",
-      category: "Sides",
-      price: "$1.49",
-      calories: "180 cal",
-      description: "Freshly baked golden buttermilk biscuit served warm.",
-      image: "assets/images/biscuits.svg",
-      featured: false,
-      popular: false
-    },
-
-    // --- DRINKS ---
-    {
-      id: "dr1",
-      name: "Pepsi Cola (Medium)",
-      category: "Drinks",
-      price: "$2.49",
-      calories: "250 cal",
-      description: "Ice-cold refreshing fountain Pepsi cola.",
-      image: "assets/images/soft-drink.svg",
-      featured: false,
-      popular: false
-    },
-    {
-      id: "dr2",
-      name: "Sweet Tea (Medium)",
-      category: "Drinks",
-      price: "$2.49",
-      calories: "180 cal",
-      description: "Southern style freshly brewed sweet iced tea.",
-      image: "assets/images/soft-drink.svg",
-      featured: false,
-      popular: false
-    },
-
-    // --- DEALS ---
-    {
-      id: "dl1",
-      name: "$20 Fill Up Box",
-      category: "Deals",
-      price: "$20.00",
-      calories: "2600 cal",
-      description: "12 Pc. Nuggets, 4 Pc. Chicken, Secret Recipe Fries, 4 Biscuits & 4 Dipping Sauces.",
-      image: "assets/images/family-bucket.svg",
+      id: "md3",
+      name: "Midnight Deal 3",
+      category: "Midnight Deals",
+      price: "Rs. 950 ($3.40)",
+      calories: "1100 cal",
+      description: "1 Mighty Zinger Burger + 1 Regular Fries + 1 Chilled Drink for the ultimate late night bite.",
+      image: "assets/images/chicken-sandwich.webp",
       featured: true,
       popular: true
     }
@@ -316,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <article class="menu-card" data-category="${item.category}">
         <div class="menu-card-img-wrapper">
           <span class="card-category-badge">${item.category}</span>
-          <img src="${item.image}" alt="${item.name} menu item with price and calories" width="400" height="250" loading="lazy">
+          <img src="${item.image}" alt="${item.name} KFC menu prices and calories" width="400" height="250" loading="lazy">
         </div>
         <div class="menu-card-body">
           <div class="menu-card-header">
@@ -364,14 +424,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Quick Category Row Click -> Sync Filter Pill & Smooth Scroll
   const quickCatCards = document.querySelectorAll('.quick-category-card');
   quickCatCards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      const catName = card.querySelector('.quick-category-name')?.textContent.trim();
+    card.addEventListener('click', () => {
+      const catName = card.getAttribute('data-category-target') || card.querySelector('.quick-category-name')?.textContent.trim();
       if (!catName) return;
 
-      // Find matching category pill
-      const targetCategory = (catName === 'Fried Chicken') ? 'Chicken' : catName;
       const matchingPill = Array.from(filterPills).find(
-        p => p.getAttribute('data-category').toLowerCase() === targetCategory.toLowerCase()
+        p => p.getAttribute('data-category').toLowerCase() === catName.toLowerCase()
       );
 
       if (matchingPill) {
