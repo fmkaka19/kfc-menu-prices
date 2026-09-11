@@ -112,11 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id: "ac5",
-      name: "3 Pc. Extra Crispy Tenders Combo",
+      name: "3 Pc. Extra Crispy Tenders (Strips) Combo",
       category: "Ala Carte & Combos",
       price: "Rs. 890 ($3.20)",
       calories: "780 kcal",
-      description: "3 hand-breaded chicken tenders, dipping sauce, crispy fries, dinner roll, and a drink.",
+      description: "3 hand-breaded crispy chicken strips (tenders), dipping sauce, fries, dinner roll, and a drink.",
       image: "assets/images/crispy-tenders.webp",
       featured: true,
       popular: true
@@ -268,6 +268,17 @@ document.addEventListener('DOMContentLoaded', () => {
       description: "Creamy whipped mashed potatoes topped with savory signature brown herb gravy.",
       image: "assets/images/mashed-potatoes.webp",
       featured: false,
+      popular: true
+    },
+    {
+      id: "sbv_biscuit",
+      name: "Warm Buttermilk Biscuit",
+      category: "Snacks & Beverages",
+      price: "Rs. 180 ($0.65)",
+      calories: "180 kcal",
+      description: "Freshly baked golden flaky buttermilk biscuit served warm. Affordable solo KFC biscuit price.",
+      image: "assets/images/biscuits.webp",
+      featured: true,
       popular: true
     },
     {
@@ -486,9 +497,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Close drawer if window is resized above mobile breakpoint (768px)
+  // Close drawer if window is resized above mobile breakpoint (1100px)
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 768 && hamburgerBtn && hamburgerBtn.classList.contains('is-active')) {
+    if (window.innerWidth > 1100 && hamburgerBtn && hamburgerBtn.classList.contains('is-active')) {
       closeMobileNav();
     }
   });
@@ -510,7 +521,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btn) btn.setAttribute('aria-expanded', 'false');
       });
 
-      // Toggle current
       if (!isOpen) {
         faqItem.classList.add('active');
         button.setAttribute('aria-expanded', 'true');
@@ -534,9 +544,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Scrollspy highlight active section link in header nav
+    if (window.scrollY < 250) {
+      navDesktopLinks.forEach(link => {
+        if (link.getAttribute('href') === 'index.html') {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+      return;
+    }
+
     let currentSectionId = '';
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 100;
+      const sectionTop = section.offsetTop - 120;
       const sectionHeight = section.offsetHeight;
       if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
         currentSectionId = section.getAttribute('id');
@@ -545,10 +566,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (currentSectionId) {
       navDesktopLinks.forEach(link => {
-        link.classList.remove('active');
         const href = link.getAttribute('href');
         if (href === `#${currentSectionId}`) {
           link.classList.add('active');
+        } else {
+          link.classList.remove('active');
         }
       });
     }
