@@ -423,7 +423,6 @@ button {
 
 .hero-title span {
   color: var(--color-primary);
-  display: block;
 }
 
 .hero-description {
