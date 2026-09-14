@@ -647,6 +647,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // --------------------------------------------------------------------------
+  // 8. Policy & Contact Modal Dialog Manager
+  // --------------------------------------------------------------------------
+  const modalOpenLinks = document.querySelectorAll('.modal-open-link');
+  const modalOverlays = document.querySelectorAll('.modal-overlay');
+
+  const openModal = (modalId) => {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+      const closeBtn = modal.querySelector('.modal-close-btn');
+      if (closeBtn) closeBtn.focus();
+    }
+  };
+
+  const closeModal = (modal) => {
+    if (modal) {
+      modal.classList.remove('is-active');
+      document.body.style.overflow = '';
+    }
+  };
+
+  modalOpenLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const modalId = link.getAttribute('data-modal');
+      if (modalId) openModal(modalId);
+    });
+  });
+
+  modalOverlays.forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal(overlay);
+    });
+    const closeBtn = overlay.querySelector('.modal-close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => closeModal(overlay));
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      modalOverlays.forEach(overlay => {
+        if (overlay.classList.contains('is-active')) closeModal(overlay);
+      });
+    }
+  });
+
   // Initial Setup: Ensure all cards and sections are displayed
   applySearchAndFilter();
 });
