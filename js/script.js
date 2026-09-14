@@ -341,10 +341,11 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   // --------------------------------------------------------------------------
-  // 2. DOM Elements Selection
+  // 2. DOM Elements Selection & Category Mapping
   // --------------------------------------------------------------------------
-  const menuContainer = document.getElementById('menu-items-grid');
   const searchInput = document.getElementById('menu-search-input');
+  const clearBtn = document.getElementById('search-clear-btn');
+  const searchFeedback = document.getElementById('search-feedback');
   const filterPills = document.querySelectorAll('.filter-pill');
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const mobileOverlay = document.getElementById('mobile-nav-overlay');
@@ -352,55 +353,116 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
   const siteHeader = document.querySelector('.site-header');
 
+  const categorySections = [
+    { id: 'everyday-value-section', name: 'Everyday Value' },
+    { id: 'combos-section', name: 'Ala Carte & Combos' },
+    { id: 'signature-boxes-section', name: 'Signature Boxes' },
+    { id: 'sharing-section', name: 'Sharing & Buckets' },
+    { id: 'snacks-section', name: 'Snacks & Beverages' },
+    { id: 'midnight-deals-section', name: 'Midnight Deals' }
+  ];
+
   let currentCategory = 'All';
   let currentSearchQuery = '';
 
-  // --------------------------------------------------------------------------
-  // 3. Menu Grid Rendering Engine
-  // --------------------------------------------------------------------------
-  function renderMenuItems() {
-    if (!menuContainer) return;
+  function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, (m) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    }[m]));
+  }
 
-    // Filter Logic
-    const filtered = menuItems.filter(item => {
-      const matchesCategory = (currentCategory === 'All') || (item.category === currentCategory);
-      const matchesSearch = item.name.toLowerCase().includes(currentSearchQuery.toLowerCase()) ||
-                            item.description.toLowerCase().includes(currentSearchQuery.toLowerCase()) ||
-                            item.category.toLowerCase().includes(currentSearchQuery.toLowerCase());
-      return matchesCategory && matchesSearch;
-    });
+  // --------------------------------------------------------------------------
+  // 3. Live Menu Search & In-Place Filter Engine (Zero Card Duplication)
+  // --------------------------------------------------------------------------
+  function applySearchAndFilter() {
+    const query = currentSearchQuery.toLowerCase().trim();
+    let totalVisible = 0;
 
-    // Zero Results Handler
-    if (filtered.length === 0) {
-      menuContainer.innerHTML = `
-        <div class="no-results">
-          <div class="no-results-icon">🔍</div>
-          <h3 class="no-results-title">No menu items found</h3>
-          <p class="section-subtitle">Try adjusting your search terms or category filter.</p>
-        </div>
-      `;
-      return;
+    // Toggle Clear button visibility
+    if (clearBtn) {
+      clearBtn.style.display = query.length > 0 ? 'flex' : 'none';
     }
 
-    // Render Cards
-    menuContainer.innerHTML = filtered.map(item => `
-      <article class="menu-card" data-category="${item.category}">
-        <div class="menu-card-img-wrapper">
-          <span class="card-category-badge">${item.category}</span>
-          <img src="${item.image}" alt="${item.name}" width="600" height="400" loading="lazy" onerror="this.onerror=null; this.src='assets/images/hero-chicken.webp';">
-        </div>
-        <div class="menu-card-body">
-          <div class="menu-card-header">
-            <h3 class="menu-item-title">${item.name}</h3>
-            <span class="menu-item-price">${item.price}</span>
+    categorySections.forEach(cat => {
+      const sectionEl = document.getElementById(cat.id);
+      if (!sectionEl) return;
+
+      const cards = sectionEl.querySelectorAll('.menu-card');
+      let sectionMatches = 0;
+
+      cards.forEach(card => {
+        const title = card.querySelector('.menu-item-title')?.textContent.toLowerCase() || '';
+        const desc = card.querySelector('.menu-item-desc')?.textContent.toLowerCase() || '';
+        const price = card.querySelector('.menu-item-price')?.textContent.toLowerCase() || '';
+
+        const matchesQuery = query === '' ||
+                             title.includes(query) ||
+                             desc.includes(query) ||
+                             price.includes(query) ||
+                             cat.name.toLowerCase().includes(query);
+
+        const matchesCategory = currentCategory === 'All' || currentCategory === cat.name;
+
+        if (matchesQuery && matchesCategory) {
+          card.style.display = 'flex';
+          sectionMatches++;
+          totalVisible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Show or hide entire category section based on matches
+      if (sectionMatches > 0) {
+        sectionEl.style.display = '';
+      } else {
+        sectionEl.style.display = 'none';
+      }
+    });
+
+    // Feedback banner for search status
+    if (!searchFeedback) return;
+
+    if (query.length > 0 || currentCategory !== 'All') {
+      searchFeedback.style.display = 'block';
+      if (totalVisible === 0) {
+        searchFeedback.innerHTML = `
+          <div class="no-results">
+            <div class="no-results-icon">🔍</div>
+            <h3 class="no-results-title">No menu items found</h3>
+            <p class="section-subtitle">No items match "${escapeHtml(currentSearchQuery)}". <button class="btn-reset-search" id="btn-reset-search">Clear Search</button></p>
           </div>
-          <p class="menu-item-desc">${item.description}</p>
-          <div class="menu-card-footer">
-            <span class="calorie-tag">🔥 ${item.calories}</span>
+        `;
+        document.getElementById('btn-reset-search')?.addEventListener('click', resetSearch);
+      } else {
+        searchFeedback.innerHTML = `
+          <div class="search-count-badge">
+            <span>Showing <strong>${totalVisible}</strong> menu items ${query ? `matching "<em>${escapeHtml(currentSearchQuery)}</em>"` : ''}</span>
+            <button class="btn-reset-search" id="btn-reset-search">Reset Filter</button>
           </div>
-        </div>
-      </article>
-    `).join('');
+        `;
+        document.getElementById('btn-reset-search')?.addEventListener('click', resetSearch);
+      }
+    } else {
+      searchFeedback.style.display = 'none';
+      searchFeedback.innerHTML = '';
+    }
+  }
+
+  function resetSearch() {
+    currentSearchQuery = '';
+    currentCategory = 'All';
+    if (searchInput) searchInput.value = '';
+    if (clearBtn) clearBtn.style.display = 'none';
+    filterPills.forEach(p => {
+      if (p.getAttribute('data-category') === 'All') p.classList.add('active');
+      else p.classList.remove('active');
+    });
+    applySearchAndFilter();
   }
 
   // --------------------------------------------------------------------------
@@ -408,17 +470,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
-      currentSearchQuery = e.target.value.trim();
-      renderMenuItems();
+      currentSearchQuery = e.target.value;
+      applySearchAndFilter();
     });
 
     // Clear search on Escape key
     searchInput.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        searchInput.value = '';
-        currentSearchQuery = '';
-        renderMenuItems();
+        resetSearch();
       }
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      resetSearch();
+      if (searchInput) searchInput.focus();
     });
   }
 
@@ -427,7 +494,30 @@ document.addEventListener('DOMContentLoaded', () => {
       filterPills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
       currentCategory = pill.getAttribute('data-category');
-      renderMenuItems();
+
+      if (currentSearchQuery === '') {
+        // If no active search query, scroll smoothly to the target category
+        if (currentCategory === 'All') {
+          const menuSection = document.getElementById('menu-section');
+          if (menuSection) menuSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          categorySections.forEach(cat => {
+            const sectionEl = document.getElementById(cat.id);
+            if (sectionEl) sectionEl.style.display = '';
+            sectionEl?.querySelectorAll('.menu-card').forEach(c => c.style.display = 'flex');
+          });
+          if (searchFeedback) searchFeedback.style.display = 'none';
+        } else {
+          const targetCat = categorySections.find(c => c.name === currentCategory);
+          if (targetCat) {
+            const sectionEl = document.getElementById(targetCat.id);
+            if (sectionEl) {
+              sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        }
+      } else {
+        applySearchAndFilter();
+      }
     });
   });
 
@@ -446,7 +536,6 @@ document.addEventListener('DOMContentLoaded', () => {
         filterPills.forEach(p => p.classList.remove('active'));
         matchingPill.classList.add('active');
         currentCategory = matchingPill.getAttribute('data-category');
-        renderMenuItems();
       }
     });
   });
@@ -576,6 +665,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Initial Render Call
-  renderMenuItems();
+  // Initial Setup: Ensure all cards and sections are displayed
+  applySearchAndFilter();
 });

@@ -214,8 +214,7 @@
   <aside class="mobile-nav-panel" id="mobile-nav-panel" aria-label="Mobile Navigation Menu">
     <ul class="mobile-nav-links">
       <li><a href="index.html" class="mobile-nav-link">Home</a></li>
-      <li><a href="#menu-section" class="mobile-nav-link">Full Menu</a></li>
-      <li><a href="#popular-section" class="mobile-nav-link">Top Sellers</a></li>
+      <li><a href="#menu-section" class="mobile-nav-link">Search Menu</a></li>
       <li><a href="#everyday-value-section" class="mobile-nav-link">Everyday Value</a></li>
       <li><a href="#combos-section" class="mobile-nav-link">Ala Carte &amp; Combos</a></li>
       <li><a href="#signature-boxes-section" class="mobile-nav-link">Signature Boxes</a></li>
@@ -226,7 +225,7 @@
       <li><a href="#faq-section" class="mobile-nav-link">FAQ Guide</a></li>
     </ul>
     <div style="margin-top: 2rem;">
-      <a href="#menu-section" class="btn-primary" style="width: 100%;">View Full Menu</a>
+      <a href="#menu-section" class="btn-primary" style="width: 100%;">Search All Items</a>
     </div>
   </aside>
 
@@ -260,7 +259,7 @@
       </div>
     </section>
 
-    <!-- 3. QUICK MENU CATEGORIES (Competitor Category Bar) -->
+    <!-- 3. QUICK MENU CATEGORIES -->
     <section class="quick-categories-section" aria-label="Quick Category Selector">
       <div class="container">
         <div class="category-scroll-container">
@@ -282,30 +281,22 @@
           </a>
           <a href="#snacks-section" class="quick-category-card" data-category-target="Snacks & Beverages">
             <div class="quick-category-icon">🍟</div>
-            <span class="quick-category-name">Snacks &amp; Sides</span>
-          </a>
-          <a href="#snacks-section" class="quick-category-card" data-category-target="Snacks & Beverages">
-            <div class="quick-category-icon">🥤</div>
-            <span class="quick-category-name">Beverages</span>
+            <span class="quick-category-name">Snacks &amp; Beverages</span>
           </a>
           <a href="#midnight-deals-section" class="quick-category-card" data-category-target="Midnight Deals">
             <div class="quick-category-icon">🌙</div>
             <span class="quick-category-name">Midnight Deals</span>
           </a>
-          <a href="#popular-section" class="quick-category-card" data-category-target="All">
-            <div class="quick-category-icon">🔥</div>
-            <span class="quick-category-name">Top Sellers</span>
-          </a>
         </div>
       </div>
     </section>
 
-    <!-- 4. MAIN KFC MENU PRICES SECTION (Search & Real-time Filter) -->
+    <!-- 4. MAIN KFC MENU PRICES SECTION (Live Real-time Search & Filter Controls) -->
     <section class="menu-main-section" id="menu-section">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Menu Search &amp; Category Filter</h2>
-          <p class="section-subtitle">Search items in real-time, compare calorie counts, and check updated <strong>KFC
+          <h2 class="section-title">Menu Search &amp; Category Directory</h2>
+          <p class="section-subtitle">Search items in real-time or select a category below to browse updated <strong>KFC
               prices</strong> across all meal categories.</p>
         </div>
 
@@ -315,10 +306,11 @@
             <input type="text" id="menu-search-input" class="search-input"
               placeholder="Search KFC menu items (e.g. Zinger, Krunch, Crispy Box, Bucket, Fries, Biscuit, Tenders)..."
               aria-label="Search KFC menu items">
+            <button id="search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">✕</button>
           </div>
 
           <div class="filter-pills-wrapper" aria-label="Category Filters">
-            <button class="filter-pill active" data-category="All">All Items</button>
+            <button class="filter-pill active" data-category="All">All Categories</button>
             <button class="filter-pill" data-category="Everyday Value">Everyday Value</button>
             <button class="filter-pill" data-category="Ala Carte & Combos">Ala Carte &amp; Combos</button>
             <button class="filter-pill" data-category="Signature Boxes">Signature Boxes</button>
@@ -328,85 +320,11 @@
           </div>
         </div>
 
-        <div class="menu-grid" id="menu-items-grid">
-          <!-- Dynamic Menu Cards Populated via js/script.js -->
-        </div>
+        <div id="search-feedback" class="search-feedback" style="display: none;"></div>
       </div>
     </section>
 
-    <!-- 5. TOP SELLERS (Competitor's Best Sellers Showcase) -->
-    <section class="feature-section alt-bg" id="popular-section">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Top Sellers &amp; Customer Favorites</h2>
-          <p class="section-subtitle">The most loved crispy chicken burgers, meal combos, and bucket feasts ordered by
-            fans.</p>
-        </div>
-
-        <div class="grid-3-col">
-          <article class="menu-card">
-            <div class="menu-card-img-wrapper">
-              <span class="card-category-badge">Top Seller</span>
-              <img src="assets/images/classic-zinger-combo.webp"
-                alt="Classic Zinger Burger Combo with french fries and chilled drink" width="600" height="400"
-                loading="lazy">
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-header">
-                <h3 class="menu-item-title">Classic Zinger Burger Combo</h3>
-                <span class="menu-item-price">Rs. 950 ($3.40)</span>
-              </div>
-              <p class="menu-item-desc">Hand-breaded spicy chicken fillet burger paired with golden potato fries and an
-                ice-cold fountain drink.</p>
-              <div class="menu-card-footer">
-                <span class="calorie-tag">🔥 890 kcal</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="menu-card">
-            <div class="menu-card-img-wrapper">
-              <span class="card-category-badge">Top Seller</span>
-              <img src="assets/images/crispy-box-meal.webp"
-                alt="Signature Crispy Box Meal with fried chicken and savory sides" width="600" height="400"
-                loading="lazy">
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-header">
-                <h3 class="menu-item-title">Signature Crispy Box Meal</h3>
-                <span class="menu-item-price">Rs. 1,050 ($3.75)</span>
-              </div>
-              <p class="menu-item-desc">One piece of golden fried chicken, seasoned fries, dinner roll with savory
-                gravy, and a cold soft drink.</p>
-              <div class="menu-card-footer">
-                <span class="calorie-tag">🔥 980 kcal</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="menu-card">
-            <div class="menu-card-img-wrapper">
-              <span class="card-category-badge">Top Seller</span>
-              <img src="assets/images/value-bucket-9pc.webp"
-                alt="9-Piece Value Chicken Bucket with crispy fried chicken" width="600" height="400" loading="lazy">
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-header">
-                <h3 class="menu-item-title">9 Pc. Value Chicken Bucket</h3>
-                <span class="menu-item-price">Rs. 2,450 ($8.80)</span>
-              </div>
-              <p class="menu-item-desc">Nine pieces of freshly prepared Original Recipe or spicy fried chicken prepared
-                with 11 herbs &amp; spices.</p>
-              <div class="menu-card-footer">
-                <span class="calorie-tag">🔥 2100 kcal</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. KFC EVERYDAY VALUE MENU PRICES (Competitor Section: Everyday Value) -->
+    <!-- 5. KFC EVERYDAY VALUE MENU PRICES -->
     <section class="feature-section" id="everyday-value-section">
       <div class="container">
         <div class="section-header">
@@ -515,7 +433,7 @@
       </div>
     </section>
 
-    <!-- 7. KFC ALA CARTE & COMBOS MENU PRICES (Competitor Section: Ala Carte & Combos) -->
+    <!-- 6. KFC ALA CARTE & COMBOS MENU PRICES -->
     <section class="feature-section alt-bg" id="combos-section">
       <div class="container">
         <div class="section-header">
@@ -541,6 +459,26 @@
                 chicken breast fillet is topped with fresh lettuce and creamy mayo.</p>
               <div class="menu-card-footer">
                 <span class="calorie-tag">🔥 550 kcal</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-img-wrapper">
+              <span class="card-category-badge top-seller-badge">🔥 Top Seller</span>
+              <img src="assets/images/classic-zinger-combo.webp"
+                alt="Classic Zinger Burger Combo with french fries and chilled drink" width="600" height="400"
+                loading="lazy">
+            </div>
+            <div class="menu-card-body">
+              <div class="menu-card-header">
+                <h3 class="menu-item-title">Classic Zinger Burger Combo</h3>
+                <span class="menu-item-price">Rs. 950 ($3.40)</span>
+              </div>
+              <p class="menu-item-desc">Hand-breaded spicy chicken fillet burger paired with golden potato fries and an
+                ice-cold fountain drink.</p>
+              <div class="menu-card-footer">
+                <span class="calorie-tag">🔥 890 kcal</span>
               </div>
             </div>
           </article>
@@ -607,7 +545,7 @@
       </div>
     </section>
 
-    <!-- 8. KFC SIGNATURE BOXES MENU PRICES (Competitor Section: Signature Boxes) -->
+    <!-- 7. KFC SIGNATURE BOXES MENU PRICES -->
     <section class="feature-section" id="signature-boxes-section">
       <div class="container">
         <div class="section-header">
@@ -619,7 +557,7 @@
         <div class="grid-3-col">
           <article class="menu-card">
             <div class="menu-card-img-wrapper">
-              <span class="card-category-badge">Signature Box</span>
+              <span class="card-category-badge top-seller-badge">🔥 Top Seller</span>
               <img src="assets/images/crispy-box-meal.webp"
                 alt="Crispy Box Meal with fried chicken piece, fries, and dinner roll with gravy" width="600"
                 height="400" loading="lazy">
@@ -698,7 +636,7 @@
       </div>
     </section>
 
-    <!-- 9. KFC SHARING & FAMILY BUCKETS MENU PRICES (Competitor Section: Sharing) -->
+    <!-- 8. KFC SHARING & FAMILY BUCKETS MENU PRICES -->
     <section class="feature-section alt-bg" id="sharing-section">
       <div class="container">
         <div class="section-header">
@@ -710,7 +648,7 @@
         <div class="grid-3-col">
           <article class="menu-card">
             <div class="menu-card-img-wrapper">
-              <span class="card-category-badge">Sharing &amp; Buckets</span>
+              <span class="card-category-badge top-seller-badge">🔥 Top Seller</span>
               <img src="assets/images/value-bucket-9pc.webp"
                 alt="9-Piece Value Chicken Bucket with crispy fried chicken" width="600" height="400" loading="lazy">
             </div>
@@ -810,7 +748,7 @@
       </div>
     </section>
 
-    <!-- 10. KFC SNACKS & BEVERAGES MENU PRICES (Competitor Section: Snacks & Beverages) -->
+    <!-- 9. KFC SNACKS & BEVERAGES MENU PRICES -->
     <section class="feature-section" id="snacks-section">
       <div class="container">
         <div class="section-header">
@@ -956,7 +894,7 @@
       </div>
     </section>
 
-    <!-- 11. KFC MIDNIGHT DEALS MENU PRICES (Competitor Section: Midnight Deals) -->
+    <!-- 10. KFC MIDNIGHT DEALS MENU PRICES -->
     <section class="feature-section alt-bg" id="midnight-deals-section">
       <div class="container">
         <div class="section-header">
@@ -1029,7 +967,7 @@
       </div>
     </section>
 
-    <!-- 12. CALORIES & NUTRITION TABLE -->
+    <!-- 11. CALORIES & NUTRITION TABLE -->
     <section class="nutrition-section" id="calories-section">
       <div class="container">
         <div class="section-header">
@@ -1084,6 +1022,11 @@
                 <td><strong>Mighty Zinger Burger</strong></td>
                 <td class="price-cell">Rs. 890 ($3.20)</td>
                 <td>850</td>
+              </tr>
+              <tr>
+                <td><strong>3 Pc. Extra Crispy Tenders (Strips)</strong></td>
+                <td class="price-cell">Rs. 890 ($3.20)</td>
+                <td>780</td>
               </tr>
 
               <tr class="table-category-row">
@@ -1143,9 +1086,14 @@
                 <td>180</td>
               </tr>
               <tr>
-                <td><strong>3 Pc. Extra Crispy Tenders (Strips)</strong></td>
-                <td class="price-cell">Rs. 890 ($3.20)</td>
-                <td>780</td>
+                <td><strong>Fresh Coleslaw Salad</strong></td>
+                <td class="price-cell">Rs. 220 ($0.80)</td>
+                <td>150</td>
+              </tr>
+              <tr>
+                <td><strong>Chilled Fountain Drinks (Medium)</strong></td>
+                <td class="price-cell">Rs. 190 ($0.70)</td>
+                <td>210</td>
               </tr>
 
               <tr class="table-category-row">
@@ -1167,7 +1115,7 @@
       </div>
     </section>
 
-    <!-- 13. FAQ SECTION -->
+    <!-- 12. FAQ SECTION -->
     <section class="faq-section" id="faq-section">
       <div class="container">
         <div class="section-header">
@@ -1291,7 +1239,7 @@
       </div>
     </section>
 
-    <!-- 14. ABOUT & TRUST DISCLAIMER SECTION -->
+    <!-- 13. ABOUT & TRUST DISCLAIMER SECTION -->
     <section class="about-trust-section" id="about-section">
       <div class="container">
         <div class="about-card">
@@ -1317,7 +1265,7 @@
     </section>
   </main>
 
-  <!-- 15. SITE FOOTER -->
+  <!-- 14. SITE FOOTER -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -1352,8 +1300,7 @@
         <div>
           <h4 class="footer-col-title">Information</h4>
           <ul class="footer-links">
-            <li><a href="#about-section">About Us</a></li>
-            <li><a href="#about-section">Independent Disclaimer</a></li>
+            <li><a href="#about-section">About &amp; Disclaimer</a></li>
             <li><a href="#calories-section">Calories &amp; Nutrition</a></li>
             <li><a href="#faq-section">FAQ Guide</a></li>
           </ul>
@@ -1363,7 +1310,7 @@
         <div>
           <h4 class="footer-col-title">Resources</h4>
           <ul class="footer-links">
-            <li><a href="#popular-section">Top Sellers</a></li>
+            <li><a href="#menu-section">Menu Search</a></li>
             <li><a href="sitemap.xml">XML Sitemap</a></li>
             <li><a href="robots.txt">Robots.txt</a></li>
           </ul>
